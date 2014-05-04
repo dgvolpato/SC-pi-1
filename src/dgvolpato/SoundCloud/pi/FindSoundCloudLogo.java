@@ -1,7 +1,11 @@
 package dgvolpato.SoundCloud.pi;
 import java.io.*;
+
+import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import static dgvolpato.SoundCloud.pi.Constants.READER_BLOCK_LENGTH;
 import static dgvolpato.SoundCloud.pi.Constants.BITMAP_SIZE;
+import static dgvolpato.SoundCloud.pi.Constants.SOUNDCLOUD_LOGO_ARRAY;
+import static java.lang.Math.abs;
 
 /**
  * Created by Diego on 30/04/2014.
@@ -23,14 +27,48 @@ public class FindSoundCloudLogo {
         String fileTest = "C:\\piTest.txt";
         int count = 0;
 
+        //variables for testing purpose
+        int[] testArray = new int[BITMAP_SIZE];
+        int[] lineArray = new int[BITMAP_SIZE];
+        String[] stringArray = new String[READER_BLOCK_LENGTH];
+        String[] tempArray;
+
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String lineStart = readExactly(br, 2);
+            System.out.println("lineStart: " + lineStart);
             for(String line; (line = readExactly(br, READER_BLOCK_LENGTH)) != null ;  ) {
                 //System.out.println(line);
                 //work on line
-                TopTen = checkFileLine(TopTen, line);
+                //TopTen = checkFileLine(TopTen, line);
+                //lineArray = line.split(",");
+
+                //System.out.println("line:" + line);
+
+                tempArray = line.split("");
+
+                for(int i=1;i<tempArray.length;i++){
+                    stringArray[i-1] = tempArray[i];
+                }
+
+                //System.out.println("primeiro:" + stringArray[0]+".");
+
+
+                /*for (int i=0;i<BITMAP_SIZE;i++){
+                    System.out.print(stringArray[i] +",");
+                }*/
+
+
+
+                //System.out.println("\nlength:" + stringArray.length);
+
+                //testArray = fillArray(line, 0);
+
+                break;
             }
 
-        printTopTenLogos(TopTen);
+
+
+        //printTopTenLogos(TopTen);
         }
         catch (IOException e){
             System.out.println("File IO Error");
@@ -55,6 +93,8 @@ public class FindSoundCloudLogo {
         }
         return new String(chars);
     }
+
+/**
     public static FoundLogos[] checkFileLine (FoundLogos[] topTen, String line){
         int[] comparationArray = new int[84];
         int indexEndLine = calcEndLine();
@@ -68,6 +108,8 @@ public class FindSoundCloudLogo {
         return topTen;
     }
 
+ **/
+
     //private static FoundLogos[] compareLogo(FoundLogos[] topTen, int[] comparationArray) {
     //}
 
@@ -75,12 +117,22 @@ public class FindSoundCloudLogo {
         return READER_BLOCK_LENGTH - BITMAP_SIZE;
     }
 
-    public static int[] fillArray (String line, int i) {
+    public static int[] fillArray (int[] line, int i) {
         int[] a = new int[BITMAP_SIZE];
         for (int j=0; j<BITMAP_SIZE; j++) {
-            //a[j] = line[i+j];
-            a[j]= 0;
+            a[j] = line[i+j];
+            //a[j]= 0;
         }
         return a;
     }
+
+    public static int calcDelta (int[]a) {
+        int average = 0;
+        for (int i=0; i<BITMAP_SIZE;i++) {
+            average += abs(a[i] - SOUNDCLOUD_LOGO_ARRAY[i]);
+        }
+
+        return average;
+    }
+
 }
