@@ -7,18 +7,23 @@ import java.math.BigInteger;
  */
 public class FoundLogos {
     BigInteger offset;
-    Integer Value;
+    Integer delta;
+
+    public FoundLogos(BigInteger offset, Integer delta) {
+        this.offset = offset;
+        this.delta = delta;
+    }
 
     public BigInteger getOffset() {
         return offset;
     }
 
-    public Integer getValue() {
-        return Value;
+    public Integer getDelta() {
+        return delta;
     }
 
-    public void setValue(Integer value) {
-        Value = value;
+    public void setDelta(Integer delta) {
+        delta = delta;
     }
 
     public void setOffset(BigInteger offset) {

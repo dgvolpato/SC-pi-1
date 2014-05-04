@@ -24,7 +24,8 @@ public class FindSoundCloudLogo {
     public static void main (String[] args) {
         System.out.println("Hello, SoundCloud");
 
-        FoundLogos[] TopTen = new FoundLogos[10];
+        FoundLogos[] topTen = new FoundLogos[10];
+        topTen = initTopTen(10);
 
         String file = "C:\\pi-billion.txt";
         String fileTest = "C:\\piTest.txt";
@@ -85,6 +86,23 @@ public class FindSoundCloudLogo {
         }
     }
 
+    public static FoundLogos[] initTopTen (int size) {
+        FoundLogos[] topTen = new FoundLogos[size];
+        for (int i=0; i<topTen.length; i++){
+            topTen[i] = new FoundLogos(BigInteger.valueOf(0),1000);
+        }
+        return topTen;
+    }
+
+    public static FoundLogos[] isTopTen(int delta, BigInteger offSet, FoundLogos[] topTen) {
+
+        if (topTen[9].getDelta() != null) {
+
+        }
+
+        return topTen;
+    }
+
     private static void printTopTenLogos(FoundLogos[] topTen) {
         System.out.println("Implement printTopTenLogos");
         return;
@@ -104,36 +122,8 @@ public class FindSoundCloudLogo {
         return new String(chars);
     }
 
-/**
-    public static FoundLogos[] checkFileLine (FoundLogos[] topTen, String line){
-        int[] comparationArray = new int[84];
-        int indexEndLine = calcEndLine();
-
-
-        for (int i=0; i <= indexEndLine; i++) {
-            comparationArray = fillArray(line, i);
-            //topTen = compareLogo(topTen, comparationArray);
-        }
-
-        return topTen;
-    }
-
- **/
-
-    //private static FoundLogos[] compareLogo(FoundLogos[] topTen, int[] comparationArray) {
-    //}
-
     private static int calcEndLine() {
         return READER_BLOCK_LENGTH - BITMAP_SIZE;
-    }
-
-    public static int[] fillArray (int[] line, int i) {
-        int[] a = new int[BITMAP_SIZE];
-        for (int j=0; j<BITMAP_SIZE; j++) {
-            a[j] = line[i+j];
-            //a[j]= 0;
-        }
-        return a;
     }
 
     public static int calcDelta (int[]a) {
