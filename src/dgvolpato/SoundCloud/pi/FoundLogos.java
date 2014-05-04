@@ -6,15 +6,15 @@ import java.math.BigInteger;
  * Created by Diego on 01/05/2014.
  */
 public class FoundLogos {
-    BigInteger offset;
+    long offset;
     Integer delta;
 
-    public FoundLogos(BigInteger offset, Integer delta) {
+    public FoundLogos(long offset, Integer delta) {
         this.offset = offset;
         this.delta = delta;
     }
 
-    public BigInteger getOffset() {
+    public long getOffset() {
         return offset;
     }
 
@@ -26,7 +26,7 @@ public class FoundLogos {
         this.delta = delta;
     }
 
-    public void setOffset(BigInteger offset) {
+    public void setOffset(long offset) {
         this.offset = offset;
     }
 
