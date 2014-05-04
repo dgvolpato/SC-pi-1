@@ -1,11 +1,14 @@
 package dgvolpato.SoundCloud.pi;
 import java.io.*;
+import java.math.BigInteger;
 
 import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import static dgvolpato.SoundCloud.pi.Constants.READER_BLOCK_LENGTH;
 import static dgvolpato.SoundCloud.pi.Constants.BITMAP_SIZE;
 import static dgvolpato.SoundCloud.pi.Constants.SOUNDCLOUD_LOGO_ARRAY;
 import static java.lang.Math.abs;
+import static java.math.BigInteger.valueOf;
+import static java.util.Arrays.copyOfRange;
 
 /**
  * Created by Diego on 30/04/2014.
@@ -26,16 +29,18 @@ public class FindSoundCloudLogo {
         String file = "C:\\pi-billion.txt";
         String fileTest = "C:\\piTest.txt";
         int count = 0;
+        BigInteger bigIndex = BigInteger.valueOf(0);
 
         //variables for testing purpose
         int[] testArray = new int[BITMAP_SIZE];
         int[] lineArray = new int[BITMAP_SIZE];
         String[] stringArray = new String[READER_BLOCK_LENGTH];
         String[] tempArray;
+        int[] intArray = new int[READER_BLOCK_LENGTH];
 
         try(BufferedReader br = new BufferedReader(new FileReader(file))) {
             String lineStart = readExactly(br, 2);
-            System.out.println("lineStart: " + lineStart);
+            //System.out.println("lineStart: " + lineStart);
             for(String line; (line = readExactly(br, READER_BLOCK_LENGTH)) != null ;  ) {
                 //System.out.println(line);
                 //work on line
@@ -47,19 +52,24 @@ public class FindSoundCloudLogo {
                 tempArray = line.split("");
 
                 for(int i=1;i<tempArray.length;i++){
-                    stringArray[i-1] = tempArray[i];
+                    intArray[i-1] = Integer.parseInt(tempArray[i]);
                 }
 
-                //System.out.println("primeiro:" + stringArray[0]+".");
-
+                System.out.println("primeiro:" + intArray[0]+".");
 
                 /*for (int i=0;i<BITMAP_SIZE;i++){
                     System.out.print(stringArray[i] +",");
                 }*/
 
-
-
                 //System.out.println("\nlength:" + stringArray.length);
+
+                for (int i=0;BITMAP_SIZE+i<READER_BLOCK_LENGTH;i++) {
+                    bigIndex = bigIndex.add(valueOf(1));
+
+
+                    System.out.println("Delta:" + calcDelta(copyOfRange(intArray, i, BITMAP_SIZE+i))+" Offset:"+bigIndex);
+
+                }
 
                 //testArray = fillArray(line, 0);
 
