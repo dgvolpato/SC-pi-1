@@ -1,6 +1,7 @@
 package dgvolpato.SoundCloud.pi;
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import static com.sun.org.apache.xerces.internal.util.XMLChar.trim;
 import static dgvolpato.SoundCloud.pi.Constants.READER_BLOCK_LENGTH;
@@ -8,6 +9,7 @@ import static dgvolpato.SoundCloud.pi.Constants.BITMAP_SIZE;
 import static dgvolpato.SoundCloud.pi.Constants.SOUNDCLOUD_LOGO_ARRAY;
 import static java.lang.Math.abs;
 import static java.math.BigInteger.valueOf;
+import static java.util.Arrays.*;
 import static java.util.Arrays.copyOfRange;
 
 /**
@@ -56,7 +58,7 @@ public class FindSoundCloudLogo {
                     intArray[i-1] = Integer.parseInt(tempArray[i]);
                 }
 
-                System.out.println("primeiro:" + intArray[0]+".");
+                //System.out.println("primeiro:" + intArray[0]+".");
 
                 /*for (int i=0;i<BITMAP_SIZE;i++){
                     System.out.print(stringArray[i] +",");
@@ -67,19 +69,19 @@ public class FindSoundCloudLogo {
                 for (int i=0;BITMAP_SIZE+i<READER_BLOCK_LENGTH;i++) {
                     bigIndex = bigIndex.add(valueOf(1));
 
+                    topTen = isTopTen(calcDelta(copyOfRange(intArray, i, BITMAP_SIZE+i)),bigIndex, topTen);
 
-                    System.out.println("Delta:" + calcDelta(copyOfRange(intArray, i, BITMAP_SIZE+i))+" Offset:"+bigIndex);
+                    //System.out.println("Delta:" + calcDelta(copyOfRange(intArray, i, BITMAP_SIZE+i))+" Offset:"+bigIndex);
 
                 }
 
                 //testArray = fillArray(line, 0);
 
-                break;
+                //break;
             }
 
-
-
-        //printTopTenLogos(TopTen);
+            printTopTenLogos(topTen);
+            System.out.println("finished.");
         }
         catch (IOException e){
             System.out.println("File IO Error");
@@ -94,17 +96,44 @@ public class FindSoundCloudLogo {
         return topTen;
     }
 
-    public static FoundLogos[] isTopTen(int delta, BigInteger offSet, FoundLogos[] topTen) {
+    public static FoundLogos[] sortTopTen (FoundLogos[] topTen) {
+        FoundLogos temp = new FoundLogos(BigInteger.valueOf(0),1000);
 
-        if (topTen[9].getDelta() != null) {
+        for (int i=0;i<topTen.length;i++) {
+            for (int j=i+1; j<topTen.length; j++){
+                if (topTen[j].getDelta() < topTen[i].getDelta()  ) {
+                    temp.setOffset(topTen[i].getOffset());
+                    temp.setDelta(topTen[i].getDelta());
 
+                    topTen[i].setOffset(topTen[j].getOffset());
+                    topTen[i].setDelta(topTen[j].getDelta());
+
+                    topTen[j].setOffset(temp.getOffset());
+                    topTen[j].setDelta(temp.getDelta());
+                }
+            }
         }
 
         return topTen;
     }
 
+    public static FoundLogos[] isTopTen(int delta, BigInteger offSet, FoundLogos[] topTen) {
+
+        if (topTen[9].getDelta() > delta) {
+            topTen[9].setDelta(delta);
+            topTen[9].setOffset(offSet);
+        }
+
+        topTen = sortTopTen(topTen);
+
+        return topTen;
+    }
+
     private static void printTopTenLogos(FoundLogos[] topTen) {
-        System.out.println("Implement printTopTenLogos");
+        for (int i=0;i<topTen.length;i++){
+            System.out.println("Position: "+(i+1)+" delta:"+topTen[i].getDelta()+" offset:"+topTen[i].getOffset());
+        }
+
         return;
     }
 

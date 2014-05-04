@@ -4,7 +4,7 @@ package dgvolpato.SoundCloud.pi;
  * Created by Diego on 01/05/2014.
  */
 public class Constants {
-    public static final int READER_BLOCK_LENGTH = 10000;
+    public static final int READER_BLOCK_LENGTH = 50000;
     public static final int BITMAP_SIZE = 98;
     public static final int[] SOUNDCLOUD_LOGO_ARRAY = {
                                                         0, 0, 0, 0, 0, 3, 3, 9, 9, 9, 6, 0, 0, 0,

@@ -23,7 +23,7 @@ public class FoundLogos {
     }
 
     public void setDelta(Integer delta) {
-        delta = delta;
+        this.delta = delta;
     }
 
     public void setOffset(BigInteger offset) {
