@@ -44,7 +44,7 @@ public class FindSoundCloudLogo {
             System.out.println("finished.");
         }
         catch (IOException e){
-            System.out.println("File IO Error");
+            System.out.println("File IO Error\nPlease, be sure the data set is on C:\\pi-billion.txt");
         }
     }
 
