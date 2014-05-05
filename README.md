@@ -5,13 +5,14 @@ This algorithm was developed in java.
 To run it, it is necessary to have the data set sample file (named "pi-billion.txt") on "C:" directory.
 It is possible to change the directory of the file on the Constants.java file.
 
-In order to run the algorithm, it is possible to use the command line "java -jar SC-pi-1.jar" from the folder where the SC-pi-1.jar file is located.
+In order to run the algorithm, it is possible to use the command line "java -jar SC-pi-1.jar" from the folder where the SC-pi-1.jar file is located, or simply running the source code.
 
 The algorithm considers the offset starting on index 0 (i.e. for pi = 3.1415, we have offset[0] = 1, offset[1] = 4, offset[2] = 1, offset[3] = 5, and so on).
 
 The output of the algorithm is:
 
 ==============================================================================================
+
 Position: 1 delta:180 offset:981165565
 Sequence: 000053743536020032496985553181128909983810344939134894807349584729687746183109884672
 
@@ -40,7 +41,8 @@ Position: 9 delta:194 offset:197342977
 Sequence: 313560984264300011495970664010077917573663456957498854662995598898697947677549686339 
 
 Position: 10 delta:194 offset:789652973
-Sequence: 142204297650171312983445842322141909755200787408739757838589593329762648444919386594 
+Sequence: 142204297650171312983445842322141909755200787408739757838589593329762648444919386594
+
 ==============================================================================================
 
 

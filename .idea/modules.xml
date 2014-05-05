@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SC-pi-1.iml" filepath="$PROJECT_DIR$/SC-pi-1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SoundCloud-pi-dgvolpato.iml" filepath="$PROJECT_DIR$/SoundCloud-pi-dgvolpato.iml" />
       <module fileurl="file://$PROJECT_DIR$/SoundCloudLogoTest/SoundCloudLogoTest.iml" filepath="$PROJECT_DIR$/SoundCloudLogoTest/SoundCloudLogoTest.iml" />
     </modules>
   </component>
